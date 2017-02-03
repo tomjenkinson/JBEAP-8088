@@ -1,0 +1,48 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>jboss-test-parent</artifactId>
+		<groupId>ch.rp.jboss-test</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>project-gui</artifactId>
+	<packaging>jar</packaging>
+
+	<properties>
+		<jboss.ejb.client.bom.version>7.5.6.Final-redhat-2</jboss.ejb.client.bom.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>ch.rp.jboss-test</groupId>
+			<artifactId>project1-services</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- JBoss Client -->
+		<dependency>
+			<groupId>org.jboss.as</groupId>
+			<artifactId>jboss-as-ejb-client-bom</artifactId>
+			<version>${jboss.ejb.client.bom.version}</version>
+			<type>pom</type>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+				<!-- Maven plugin to run the application with "mvn exec:java" -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<configuration>
+					<skip>false</skip>
+					<verbose>true</verbose>
+					<mainClass>ch.rp.jboss.test.project.gui.Main</mainClass>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>ch.rp.jboss-test</groupId>
+  <artifactId>jboss-test-parent</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+
+
+  	<properties>
+		<spring.platform.version>2.0.0.RELEASE</spring.platform.version>
+		<hibernate.core.version>4.1.1.Final</hibernate.core.version>
+		<jboss.javaee.jms.spec.version>1.0.1.Final-redhat-3</jboss.javaee.jms.spec.version>
+		<jboss.javaee.ejb.spec.version>1.0.2.Final-redhat-3</jboss.javaee.ejb.spec.version>
+		<jboss.javaee.interceptors.spec.version>1.0.1.Final-redhat-3</jboss.javaee.interceptors.spec.version>
+	</properties>
+
+	  <modules>
+	    <module>project1-logic</module>
+	    <module>project1-services</module>
+	    <module>project2-logic</module>
+	    <module>project2-services</module>
+	    <module>project-gui</module>
+	  </modules>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>io.spring.platform</groupId>
+				<artifactId>platform-bom</artifactId>
+				<version>${spring.platform.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.3</version>
+          <configuration>
+            <source>1.8</source>
+            <target>1.8</target>
+            <optimize>true</optimize>
+            <showWarnings>true</showWarnings>
+            <showDeprecation>true</showDeprecation>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-ejb-plugin</artifactId>
+          <version>2.5.1</version>
+        <configuration>
+          <ejbVersion>3.0</ejbVersion>
+        </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-ear-plugin</artifactId>
+          <version>2.10.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <version>1.4.0</version>
+          <configuration>
+            <mainClass>.</mainClass>
+            <skip>true</skip>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.jboss.as.plugins</groupId>
+          <artifactId>jboss-as-maven-plugin</artifactId>
+          <version>7.7.Final</version>
+          <configuration>
+            <skip>true</skip>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>

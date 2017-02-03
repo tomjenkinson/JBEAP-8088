@@ -1,0 +1,75 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>jboss-test-parent</artifactId>
+		<groupId>ch.rp.jboss-test</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>project2-logic</artifactId>
+	<packaging>war</packaging>
+	<description>This project aims to define the business logic for the security project</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>ch.rp.jboss-test</groupId>
+			<artifactId>project2-services</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.spec.javax.ejb</groupId>
+			<artifactId>jboss-ejb-api_3.1_spec</artifactId>
+			<version>${jboss.javaee.ejb.spec.version}</version>
+			<scope>provided</scope>
+		</dependency>
+<dependency>
+  <groupId>org.jboss.spec.javax.transaction</groupId>
+  <artifactId>jboss-transaction-api_1.1_spec</artifactId>
+  <version>1.0.1.Final-redhat-3</version>
+</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<!-- Maven EJB plugin to create the EJB -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ejb-plugin</artifactId>
+			</plugin>
+			<plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-war-plugin</artifactId>
+		        <configuration>
+		          <archive>
+		            <manifestEntries>
+		              <dependencies>org.jboss.xnio, org.jboss.jts</dependencies>
+		            </manifestEntries>
+		          </archive>
+		        </configuration>
+		      </plugin>
+		      <plugin>
+		        <groupId>org.jboss.as.plugins</groupId>
+		        <artifactId>jboss-as-maven-plugin</artifactId>
+		        <configuration>
+		          <skip>false</skip>
+							<!-- deploy on second server -->
+							<port>10099</port>
+		        </configuration>
+		        <executions>
+		          <execution>
+		            <id>deploying</id>
+		            <goals>
+		              <goal>deploy</goal>
+		            </goals>
+		            <configuration>
+		              <filename>${project.name}-${project.version}.war</filename>
+		            </configuration>
+		          </execution>
+		        </executions>
+		      </plugin>
+
+		</plugins>
+	</build>
+</project>
