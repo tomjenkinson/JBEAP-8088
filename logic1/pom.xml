@@ -1,0 +1,70 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>jbeap8088-parent</artifactId>
+    <groupId>org.wildfly.jbeap8088</groupId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>jbeap8088-logic1</artifactId>
+  <packaging>war</packaging>
+  <description>This project aims to define the business logic for the security project</description>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.wildfly.jbeap8088</groupId>
+      <artifactId>jbeap8088-services1</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.wildfly.jbeap8088</groupId>
+      <artifactId>jbeap8088-services2</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jboss.spec.javax.ejb</groupId>
+      <artifactId>jboss-ejb-api_3.2_spec</artifactId>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+
+  <build>
+    <plugins>
+      <!-- Maven EJB plugin to create the EJB -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-ejb-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifestEntries>
+              <dependencies>org.jboss.xnio, org.jboss.jts</dependencies>
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.jboss.as.plugins</groupId>
+        <artifactId>jboss-as-maven-plugin</artifactId>
+        <configuration>
+          <skip>false</skip>
+        </configuration>
+        <executions>
+          <execution>
+            <id>deploying</id>
+            <goals>
+              <goal>deploy</goal>
+            </goals>
+            <configuration>
+              <filename>${project.name}-${project.version}.war</filename>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

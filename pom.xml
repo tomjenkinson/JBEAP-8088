@@ -2,44 +2,72 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>ch.rp.jboss-test</groupId>
-  <artifactId>jboss-test-parent</artifactId>
+  <groupId>org.wildfly.jbeap8088</groupId>
+  <artifactId>jbeap8088-parent</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
 
-
   <properties>
-    <spring.platform.version>2.0.0.RELEASE</spring.platform.version>
-    <hibernate.core.version>4.1.1.Final</hibernate.core.version>
-    <jboss.javaee.jms.spec.version>1.0.1.Final-redhat-3</jboss.javaee.jms.spec.version>
-    <jboss.javaee.ejb.spec.version>1.0.2.Final-redhat-3</jboss.javaee.ejb.spec.version>
-    <jboss.javaee.interceptors.spec.version>1.0.1.Final-redhat-3</jboss.javaee.interceptors.spec.version>
-    <!-- <jboss.ejb.client.bom.version>7.5.6.Final-redhat-2</jboss.ejb.client.bom.version> -->
+    <version.jboss.spec.javaee.7.0>1.1.0.Beta1</version.jboss.spec.javaee.7.0>
     <version.org.wildfly>11.0.0.Alpha1-SNAPSHOT</version.org.wildfly>
-        <version.jboss.spec.javaee.7.0>1.1.0.Beta1</version.jboss.spec.javaee.7.0>
+
+    <!-- <jboss.ejb.client.bom.version>7.5.6.Final-redhat-2</jboss.ejb.client.bom.version> -->
+
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.target>1.7</maven.compiler.target>
+    <maven.compiler.source>1.7</maven.compiler.source>
+
   </properties>
 
   <modules>
-    <module>project1-logic</module>
-    <module>project1-services</module>
-    <module>project2-logic</module>
-    <module>project2-services</module>
-    <module>project-gui</module>
+    <module>logic1</module>
+    <module>services1</module>
+    <module>logic2</module>
+    <module>services2</module>
+    <!-- <module>itest</module> -->
   </modules>
 
   <dependencyManagement>
     <dependencies>
+      <!-- Define the version of JBoss' Java EE 6 APIs we want to use -->
+      <!-- JBoss distributes a complete set of Java EE 6 APIs including
+        a Bill of Materials (BOM). A BOM specifies the versions of a "stack" (or
+        a collection) of artifacts. We use this here so that we always get the correct
+        versions of artifacts. Here we use the jboss-javaee-6.0 stack (you can
+        read this as the JBoss stack of the Java EE 6 APIs). You can actually
+        use this stack with any version of JBoss EAP that implements Java EE 6. -->
       <dependency>
-        <groupId>io.spring.platform</groupId>
-        <artifactId>platform-bom</artifactId>
-        <version>${spring.platform.version}</version>
+        <groupId>org.jboss.spec</groupId>
+        <artifactId>jboss-javaee-7.0</artifactId>
+        <version>${version.jboss.spec.javaee.7.0}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+
+      <dependency>
+        <groupId>org.wildfly</groupId>
+        <artifactId>wildfly-ejb-client-bom</artifactId>
+        <version>${version.org.wildfly}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+
+      <dependency>
+        <groupId>org.wildfly.jbeap8088</groupId>
+        <artifactId>jbeap8088-services1</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.wildfly.jbeap8088</groupId>
+        <artifactId>jbeap8088-services2</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+      </dependency>
+
+
     </dependencies>
   </dependencyManagement>
-
 
 
   <build>
