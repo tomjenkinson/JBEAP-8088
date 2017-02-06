@@ -1,0 +1,6 @@
+
+= A reproducer for link:https://issues.jboss.org/browse/JBEAP-8088[JBEAP-8088] XA resource with same RMid are not ended properly
+
+* Make sure you have Maven 3.3.1+
+* `mvn clean install`
+* Inspect the output of `org.wildfly.jbeap8088.RemoteEJBClientITest` in the console
