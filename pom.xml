@@ -10,7 +10,8 @@
 
   <properties>
     <version.jboss.spec.javaee.7.0>1.1.0.Beta1</version.jboss.spec.javaee.7.0>
-    <version.org.wildfly>11.0.0.Alpha1-SNAPSHOT</version.org.wildfly>
+    <version.org.wildfly>11.0.0.Alpha1-SRC-revision-da543f7bfe86435ddd6bcb4c783c5e71425818cd</version.org.wildfly>
+    <version.org.slf4j>1.7.2</version.org.slf4j>
 
     <!-- <jboss.ejb.client.bom.version>7.5.6.Final-redhat-2</jboss.ejb.client.bom.version> -->
 
@@ -25,7 +26,7 @@
     <module>services1</module>
     <module>logic2</module>
     <module>services2</module>
-    <!-- <module>itest</module> -->
+    <module>itest</module>
   </modules>
 
   <dependencyManagement>
@@ -61,7 +62,19 @@
       </dependency>
       <dependency>
         <groupId>org.wildfly.jbeap8088</groupId>
+        <artifactId>jbeap8088-logic1</artifactId>
+        <type>war</type>
+        <version>0.0.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.wildfly.jbeap8088</groupId>
         <artifactId>jbeap8088-services2</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.wildfly.jbeap8088</groupId>
+        <artifactId>jbeap8088-logic2</artifactId>
+        <type>war</type>
         <version>0.0.1-SNAPSHOT</version>
       </dependency>
 
