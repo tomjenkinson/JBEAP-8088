@@ -9,10 +9,33 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>project-gui</artifactId>
 	<packaging>jar</packaging>
+    <dependencyManagement>
+        <dependencies>
+            <!-- Define the version of JBoss' Java EE 6 APIs we want to use -->
+            <!-- JBoss distributes a complete set of Java EE 6 APIs including
+                a Bill of Materials (BOM). A BOM specifies the versions of a "stack" (or
+                a collection) of artifacts. We use this here so that we always get the correct
+                versions of artifacts. Here we use the jboss-javaee-6.0 stack (you can
+                read this as the JBoss stack of the Java EE 6 APIs). You can actually
+                use this stack with any version of JBoss EAP that implements Java EE 6. -->
+            <dependency>
+                <groupId>org.jboss.spec</groupId>
+                <artifactId>jboss-javaee-7.0</artifactId>
+                <version>${version.jboss.spec.javaee.7.0}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
 
-	<properties>
-		<jboss.ejb.client.bom.version>7.5.6.Final-redhat-2</jboss.ejb.client.bom.version>
-	</properties>
+       <dependency>
+            <groupId>org.wildfly</groupId>
+            <artifactId>wildfly-ejb-client-bom</artifactId>
+            <version>${version.org.wildfly}</version>
+                <type>pom</type>
+                <scope>import</scope>
+       </dependency>
+
+        </dependencies>
+    </dependencyManagement>
 	<dependencies>
 		<dependency>
 			<groupId>ch.rp.jboss-test</groupId>
@@ -22,11 +45,15 @@
 
 		<!-- JBoss Client -->
 		<dependency>
-			<groupId>org.jboss.as</groupId>
-			<artifactId>jboss-as-ejb-client-bom</artifactId>
-			<version>${jboss.ejb.client.bom.version}</version>
+            <groupId>org.wildfly</groupId>
+            <artifactId>wildfly-ejb-client-bom</artifactId>
 			<type>pom</type>
 		</dependency>
+
+      <dependency>
+        <groupId>org.wildfly</groupId>
+        <artifactId>wildfly-naming</artifactId>
+      </dependency>
 
 	</dependencies>
 

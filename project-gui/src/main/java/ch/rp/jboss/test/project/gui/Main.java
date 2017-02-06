@@ -14,6 +14,7 @@ public class Main {
 
         Properties jndiProps = new Properties();
         jndiProps.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
+        jndiProps.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.as.naming.InitialContextFactory");
         Context ctx = new InitialContext(jndiProps);
         // lookup the bean     Foo
         Service1 service1 = (Service1) ctx.lookup("ejb:/project1/project1/Service1!ch.rp.jboss.test.project1.Service1");
