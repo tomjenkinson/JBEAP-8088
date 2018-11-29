@@ -18,14 +18,18 @@ package org.wildfly.jbeap8088;
 
 import java.util.Properties;
 
+import javax.ejb.EJBTransactionRolledbackException;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.transaction.RollbackException;
 
 import org.jboss.logging.Logger;
 import org.junit.Test;
 
 import ch.rp.jboss.test.project1.Service1;
+
+import static junit.framework.TestCase.fail;
 
 /**
  * A sample program which acts a remote client for a EJB deployed on AS7 server. This program shows how to lookup stateful and
@@ -45,7 +49,12 @@ public class RemoteEJBClientITest {
         Context ctx = new InitialContext(jndiProps);
         // lookup the bean     Foo
         Service1 service1 = (Service1) ctx.lookup("ejb:/project1/project1/Service1!ch.rp.jboss.test.project1.Service1");
-        service1.executeAction9();
+        try {
+            service1.executeAction9();
+            fail("With strict mode this should not work");
+        } catch (EJBTransactionRolledbackException e) {
+            // This is expected
+        }
 
         ctx.close();
     }

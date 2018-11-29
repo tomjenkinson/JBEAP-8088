@@ -78,6 +78,14 @@
         <version>1.1.0.Beta1</version>
         <configuration>
           <artifact>org.wildfly:wildfly-dist:${version.org.wildfly}:zip</artifact>
+          <!--<commands>-->
+              <!--<command>/system-property=com.arjuna.ats.jta.common.JTAEnvironmentBean.strictJTA12DuplicateXAENDPROTOErr:add(value=true)</command>-->
+          <!--</commands>          -->
+          <java-opts>
+            <java-opt>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</java-opt>
+            <java-opt>-DJTAEnvironmentBean.strictJTA12DuplicateXAENDPROTOErr=true</java-opt>
+          </java-opts>
+          <startup-timeout>360</startup-timeout>
         </configuration>
         <executions>
           <execution>

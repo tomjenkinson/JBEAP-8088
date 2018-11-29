@@ -10,7 +10,7 @@
 
   <properties>
     <version.jboss.spec.javaee.7.0>1.1.0.Beta1</version.jboss.spec.javaee.7.0>
-    <version.org.wildfly>11.0.0.Alpha1-SRC-revision-da543f7bfe86435ddd6bcb4c783c5e71425818cd</version.org.wildfly>
+    <version.org.wildfly>14.0.1.Final</version.org.wildfly>
     <version.org.slf4j>1.7.2</version.org.slf4j>
 
     <!-- <jboss.ejb.client.bom.version>7.5.6.Final-redhat-2</jboss.ejb.client.bom.version> -->

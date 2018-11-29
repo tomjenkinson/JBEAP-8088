@@ -8,6 +8,7 @@ public class DummyXARessource implements XAResource {
 
     private int transactionTimeout;
     private String name;
+    private static int counter;
 
     public DummyXARessource(String name) {
         this.name = name;
@@ -21,7 +22,10 @@ public class DummyXARessource implements XAResource {
     @Override
     public void end(Xid arg0, int arg1) throws XAException {
         System.out.println("end " + name + " xid=" + arg0);
-        new RuntimeException().printStackTrace();
+        counter++;
+        if (counter == 2) {
+            throw new XAException(XAException.XAER_PROTO);
+        }
     }
 
     @Override
@@ -66,7 +70,6 @@ public class DummyXARessource implements XAResource {
     @Override
     public void start(Xid arg0, int arg1) throws XAException {
         System.out.println("start " + name + " xid=" + arg0);
-        new RuntimeException().printStackTrace();
     }
 
 }
